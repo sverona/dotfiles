@@ -1,0 +1,51 @@
+#!/bin/bash
+
+front_matter="%{U{{ n_red }}}"
+decor_front_current="%{B{{ b_blue }}}%{+u}"
+decor_front_active="%{B{{ n_blue }}}"
+decor_middle="%{B-}"
+decor_back="%{-u}"
+sep="%{F-}"
+
+while read line; do
+           idx=$(awk '{print $1}' <<< "$line")
+           name=$(awk '{print $NF}' <<< "$line")
+
+	   names[$idx]=$name
+done <<< "$(wmctrl -d)"
+
+
+xprop -root -spy _NET_ACTIVE_WINDOW | \
+    while read idle; do
+	for idx in "${!names[@]}"; do
+		states[$idx]=''
+	done
+
+        buf="W$front_matter"
+
+	cur=$(xprop -root _NET_CURRENT_DESKTOP | cut -d" " -f3)
+	states[$cur]='!'
+
+	for idx in $(wmctrl -l | cut -d" " -f3 | uniq); do
+		states[$idx]='@'
+	done
+
+	for idx in "${!names[@]}"; do
+		state=${states[$idx]}
+		name=${names[$idx]}
+           case $state in
+               # current workspace
+               "!") buf="${buf}$decor_front_current $name $decor_middle$decor_back$sep" ;;
+	       "@")
+                        # active workspace 
+                        buf="${buf}$decor_front_active $name $decor_middle$decor_back$sep"
+			;;
+               *) 
+                        # inactive workspace 
+                        buf="${buf}$sep $name $sep"
+           esac
+	done
+
+        echo $buf
+    done
+

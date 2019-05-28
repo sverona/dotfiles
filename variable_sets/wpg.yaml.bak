@@ -1,0 +1,27 @@
+colors:
+    foreground: '{color7}'
+    background: '{color0}'
+    black:
+        normal: '{color0}'
+        bold: '{color8}'
+    red:
+        normal: '{color1}'
+        bold: '{color9}'
+    green:
+        normal: '{color2}'
+        bold: '{color10}'
+    yellow:
+        normal: '{color3}'
+        bold: '{color11}'
+    blue:
+        normal: '{color4}'
+        bold: '{color12}'
+    magenta:
+        normal: '{color5}'
+        bold: '{color13}'
+    cyan:
+        normal: '{color6}'
+        bold: '{color14}'
+    white:
+        normal: '{color7}'
+        bold: '{color15}'
