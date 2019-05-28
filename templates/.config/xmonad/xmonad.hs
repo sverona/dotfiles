@@ -119,6 +119,7 @@ myXmonadBar = "while read line; do echo W$line; done > /tmp/panel-fifo_0"
 
 main = do
     lemonbar <- spawnPipe myXmonadBar
+    spawn "panel"
     xmonad $ ewmh defaultConfig
         { terminal           = myTerminal
         , borderWidth        = 2
