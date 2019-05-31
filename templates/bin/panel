@@ -17,7 +17,7 @@ for n in 0 1; do
     mkfifo "$PANEL_FIFO"_$n
 
     ./panel_ewmh > "$PANEL_FIFO"_$n &
-    xtitle -sf 'S%{+u}%s%{-u}\n' > "$PANEL_FIFO"_$n &
+    xtitle -t50 -sf 'S%{+u}%s%{-u}\n' > "$PANEL_FIFO"_$n &
     #clock -sf 'S %A, %d %B %Y, %I:%M %P' > "$PANEL_FIFO"_$n &
     conky -c ~/.config/conky/top | ./panel_conky > "$PANEL_FIFO"_$n &
 
