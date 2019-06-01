@@ -1,8 +1,8 @@
 #!/bin/bash
 
 front_matter="%{U{{ n_red }}}"
-decor_front_current="%{B{{ b_blue }}}%{+u}"
-decor_front_active="%{B{{ n_blue }}}"
+decor_front_current="%{B{{ b_cyan }}}%{F{{ bgc }}}"
+decor_front_active="%{+u}"
 decor_middle="%{B-}"
 decor_back="%{-u}"
 sep="%{F-}"
@@ -23,12 +23,12 @@ xprop -root -spy _NET_ACTIVE_WINDOW | \
 
         buf="W$front_matter"
 
-	cur=$(xprop -root _NET_CURRENT_DESKTOP | cut -d" " -f3)
-	states[$cur]='!'
-
 	for idx in $(wmctrl -l | cut -d" " -f3 | uniq); do
 		states[$idx]='@'
 	done
+
+	cur=$(xprop -root _NET_CURRENT_DESKTOP | cut -d" " -f3)
+	states[$cur]='!'
 
 	for idx in "${!names[@]}"; do
 		state=${states[$idx]}
