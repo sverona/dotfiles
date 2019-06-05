@@ -160,7 +160,7 @@ main = do
 
 -- Define constants
 
-myTerminal     = "alacritty"
+myTerminal     = "xst"
 myModMask      = mod4Mask
 
 color0  = "{{ n_black }}"
